@@ -1,70 +1,50 @@
-/* Build a Highly Scalable Carousel Component in React JS
-
- Requirements:
-  - We want to create a carousel component which takes array of images as input.
-  - The component should efficiently handle a large number of images while maintaining 
-  scalability, performance optimizations, and extensibility.
-  - Provide callback functions for events like image click, enabling users to define 
-  custom behavior.
-  - Focus on Accessibility.
-*/
-
-import {useEffect, useState} from "react";
-import "./App.css";
-import Carousel from "./components/carousel";
-
-const App = () => {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const fetchImages = async (imgLimit) => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/photos?_limit=${imgLimit}`
-      );
-      const data = await response.json();
-      setImages(data);
-    } catch (error) {
-      console.error("Error fetching images:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+import { useState, useEffect } from "react";
+// taken from namaste frontend system design
+const ImageSlider = () => {
+  const images = [
+    "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg",
+    "https://piktochart.com/wp-content/uploads/2023/04/large-29.jpg",
+    "https://i.pinimg.com/originals/2b/66/01/2b66016d5a1e2d230ecce59f8e673382.png",
+    "https://i.pinimg.com/736x/5f/09/47/5f0947219a7f446e804e7e0055089fad.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoKMpEfmuwzKmwyl4reX0NW7-Ixgn1DCz6IvxSYpq_CQ&s",
+  ];
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
-    fetchImages(8);
+    const i = setInterval(() => {
+      loadNextImage();
+    }, 3000);
+
+    return () => {
+      clearInterval(i);
+    };
   }, []);
 
+  const loadNextImage = () => {
+    setActive((active) => (active + 1) % images.length);
+  };
+  const loadPrevImage = () => {
+    setActive((active) => (active - 1 < 0 ? images.length - 1 : active - 1));
+  };
+
   return (
-    <div className="carousel-container">
-      <Carousel
-        images={images}
-        isLoading={loading}
-        onImgClick={(image, index) => {}}
-        imgPerSlide={2}
-        imageLimit={4}
-        customPrevButton={(onClick) => (
-          <button
-            className="btn prev"
-            style={{background: "red"}}
-            onClick={onClick}
-          >
-            Prev
-          </button>
-        )}
-        customNextButton={(onClick) => (
-          <button
-            className="btn next"
-            style={{background: "blue"}}
-            onClick={onClick}
-          >
-            Prev
-          </button>
-        )}
-      />
+    <div>
+      <div style= {{display: "flex", flexDirection: "row"}}>
+        <img
+          onClick={loadPrevImage}
+          style= {{height: "22px"}}
+          alt="left arrow"
+          src="https://cdn0.iconfinder.com/data/icons/glyphpack/26/nav-arrow-left-512.png"
+        />
+        <img style= {{height: "102px"}}src={images[active]} alt="wallpaper" />
+        <img
+          onClick={loadNextImage}
+        style= {{height: "22px"}}
+          alt="right arrow"
+          src="https://cdn-icons-png.flaticon.com/512/32/32213.png"
+        />
+      </div>
     </div>
   );
 };
-
-export default App;
+export default ImageSlider;
