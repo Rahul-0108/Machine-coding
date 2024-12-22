@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .container {
+            margin: 10px;
+
+            .content {
+                border: 1px solid black;
+                min-height: 200px;
+                margin-left: -5px;
+            }
+        }
+
+        span {
+            margin: -5px;
+        }
+
+        button {
+            border-bottom-width: 0px;
+            background-color: silver;
+        }
+
+        button:hover {
+            background-color: lightgray;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="tab">
+            <span><button id="tabValue1">Tab1</button></span>
+            <span><button id="tabValue2">Tab2</button></span>
+            <span><button id="tabValue3">Tab3</button></span>
+        </div>
+        <div id="content" class="content">
+        </div>
+    </div>
+
+    <script>
+        const data = {
+            tabValue1: "A",
+            tabValue2: "B",
+            tabValue3: "C"
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("tab").addEventListener("click", function (event) {
+                if (event.target.id.startsWith("tabValue")) {
+                    document.getElementById("content").innerText = data[event.target.id];
+                    document.getElementById(event.target.id).style.backgroundColor = "lightgrey";
+                    ["tabValue1", "tabValue2", "tabValue3"].forEach(value => {
+                        if (event.target.id !== value) {
+                            document.getElementById(value).style.backgroundColor = "silver";
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
