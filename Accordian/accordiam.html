@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .content {
+            margin: 10px;
+            width: 100%;
+
+            .section {
+                padding: 15px 2px;
+                background-color: lightgray;
+                border: 0.5px solid lightslategrey;
+            }
+            .section-content {
+                padding: 15px 12px;
+                background-color: white;
+                border: 0.5px solid lightslategrey;
+            }
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="content" class="content">
+    </div>
+
+    <script>
+        const data = [
+            {
+                id: "section1",
+                title: "Section 1",
+                content: "A"
+            },
+            {
+                id: "section2",
+                title: "Section 2",
+                content: "B"
+            },
+            {
+                id: "section3",
+                title: "Section 3",
+                content: "C"
+            },
+        ]
+        document.addEventListener("DOMContentLoaded", function () {
+            data.forEach(el => {
+                const node = document.createElement("div");
+                node.innerText = el.title;
+                node.id = el.id;
+                node.className = "section"
+                node.addEventListener("click", function() {
+                    data.map(va => va.id + "content").forEach(v => {
+                        if((el.id + "content") !== v) {
+                        document.getElementById(v).style.display = "none";
+                        }
+                        document.getElementById(el.id + "content").style.display = document.getElementById(el.id + "content").style.display === "none" ? "block" : "none";
+                    })
+                })
+                document.getElementById("content").appendChild(node);
+
+                const node1 = document.createElement("div");
+                node1.innerText = el.content;
+                node1.id = el.id +  "content";
+                node1.className = "section-content";
+                node1.style.display = "none";
+                document.getElementById("content").appendChild(node1);
+            })
+        })
+    </script>
+</body>
+
+</html>
