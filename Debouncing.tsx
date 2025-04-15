@@ -72,16 +72,14 @@ Execution    🔥                        🔥        🔥
 
 ✅ After 1000ms from the last call (800ms + 1000ms = 1800ms), fires again (trailing: true)
 
-if I call log at 1001ms It will execute since its after the wait period.
-
 
 
 
 🔁 Quick comparison
-Setting	Fires immediately?	Fires after delay?
-leading: true, trailing: false	✅ Yes	❌ No
-leading: false, trailing: true	❌ No	✅ Yes
-leading: true, trailing: true	✅ Yes	✅ Yes
+Setting                       	Fires immediately?	Fires after delay?
+leading: true, trailing: false	✅ Yes              	❌ No
+leading: false, trailing: true	❌ No               	✅ Yes
+leading: true, trailing: true	  ✅ Yes	                ✅ Yes
 
 
 
