@@ -23,6 +23,8 @@ Within 1000ms of that? ➝ Ignored ❌
 
 After 1000ms? ➝ Next call runs immediately again ✅
 
+If you called log() again after 1000ms has passed since the last accepted call, it would fire immediately again.
+
 No trailing execution at all
 
 
@@ -71,6 +73,16 @@ Execution    🔥                        🔥        🔥
 🚫 Ignores intermediate calls during wait period
 
 ✅ After 1000ms from the last call (800ms + 1000ms = 1800ms), fires again (trailing: true)
+
+ If you call again at 1800ms, it fires immediately again (because the debounce window is reset)
+
+if we do not call at between 1800 and 2800 ms, then it will be fired at 2800 ms instantly(trailing) and debounce window is closed.
+
+✅ Summary
+Feature	            Behavior
+Immediate call	✅ Yes (leading)
+Delayed call	✅ Yes (trailing)
+How many times?	✅ Twice per burst
 
 
 
