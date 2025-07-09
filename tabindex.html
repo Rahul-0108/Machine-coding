@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>tabIndex Accessibility Demo</title>
+  <style>
+    .focusable {
+      padding: 8px;
+      margin: 4px;
+      border: 2px solid gray;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .focusable:focus {
+      outline: 3px solid blue;
+    }
+    .tooltip {
+      margin-top: 16px;
+      padding: 8px;
+      background: #f0f0f0;
+      width: 250px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>tabIndex Accessibility Demo</h1>
+  <p>Use Tab to navigate through these elements:</p>
+
+  <button>Native Button</button>
+  
+  <div
+    class="focusable"
+    role="button"
+    tabIndex="0"
+    onclick="alert('Div clicked!')"
+  >
+    Div as Button (tabIndex="0")
+  </div>
+
+  <div
+    class="focusable"
+    role="button"
+    tabIndex="-1"
+    onclick="alert('Hidden from Tab, but focusable programmatically')"
+  >
+    Div as Button (tabIndex="-1")
+  </div>
+
+  <button id="focusDivBtn">Focus -1 Div</button>
+
+  <div class="tooltip" id="tooltip" tabIndex="0">
+    Iʼm a tooltip with tabIndex="0" (so I can be focused and read by screen reader).
+  </div>
+
+  <script>
+    document.getElementById('focusDivBtn')
+      .addEventListener('click', function() {
+        document.querySelector('[tabIndex="-1"]').focus();
+      });
+  </script>
+</body>
+</html>
