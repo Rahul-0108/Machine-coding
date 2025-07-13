@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Draw Rectangle on Canvas</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { border: 1px solid #000; display: block; margin: 10px auto; }
+  </style>
+</head>
+<body>
+<canvas id="drawCanvas" width="800" height="600"></canvas>
+
+<script>
+  // clear canvas every time on mousemove and redraw
+const canvas = document.getElementById('drawCanvas');
+const ctx = canvas.getContext('2d');
+
+let isDrawing = false;
+let startX = 0;
+let startY = 0;
+let currentX = 0;
+let currentY = 0;
+
+let rectangles = [];
+
+canvas.addEventListener('mousedown', (e) => {
+  startX = e.offsetX;
+  startY = e.offsetY;
+  isDrawing = true;
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  if (!isDrawing) return;
+  currentX = e.offsetX;
+  currentY = e.offsetY;
+
+  draw();
+});
+
+canvas.addEventListener('mouseup', () => {
+  if (isDrawing) {
+    rectangles.push(getCurrentRect());
+    isDrawing = false;
+  }
+});
+
+function getCurrentRect() {
+  const x = Math.min(startX, currentX);
+  const y = Math.min(startY, currentY);
+  const width = Math.abs(currentX - startX);
+  const height = Math.abs(currentY - startY);
+  return { x, y, width, height };
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw stored rectangles
+  rectangles.forEach(rect => {
+    ctx.strokeStyle = 'black';
+    ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+  });
+
+  // Draw current preview rectangle
+  if (isDrawing) {
+    const rect = getCurrentRect();
+    ctx.strokeStyle = 'red';
+    ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+  }
+}
+</script>
+</body>
+</html>
