@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  -webkit-font-smoothing: auto;
+  -moz-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+main {
+  padding: 50px;
+  width: max-content;
+}
+
+main section {
+  border: 2px solid #414141;
+}
+
+.board {
+  position: relative;
+}
+
+.line {
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+}
+
+.line:hover {
+  cursor: pointer;
+  border: 1px solid black;
+  scale: 0.95;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}

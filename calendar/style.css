@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  -webkit-font-smoothing: auto;
+  -moz-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+    width:100%;
+}
+
+main {
+  width: 80%;
+  margin: 50px auto;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+main:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+#graphic {
+  width: 100%;
+  overflow: hidden;
+}
+
+#graphic img {
+  max-width: 100%;
+}
+
+#content {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#content h1,
+#content p {
+  margin-top: 0px;
+}
+
+#content a,
+#content p {
+  color: #7b7979;
+}
+
+#content a {
+  font-weight: bold;
+}
+
+#content a:hover {
+  color: #414141;
+  cursor: pointer;
+}
+
+.vertical-line {
+  position: absolute;
+  left: 120px;
+  height: 120rem;
+  background-color: black;
+  width: 1px;
+  z-index: 99;
+}
+
+.time-intervals {
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+
+}
+
+#calender {
+  margin: 50px;
+  position: relative;
+  overflow: hidden;
+  height: 120rem;
+  border: 1px solid black;
+  width:90%;
+}
+
+.time-meetings {
+  position: absolute;
+}
