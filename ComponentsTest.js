@@ -62,3 +62,73 @@ const Child2 = () => {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Parent is rendered
+// ComponentsTest.js:12 Child is rendered
+// ComponentsTest.js:21 ParentSibling is rendered
+// ComponentsTest.js:14 Child committed effect
+// ComponentsTest.js:5 Parent committed effect
+// ComponentsTest.js:23 ParentSibling committed effect
+
+import React, { useEffect } from "react";
+function Parent({ children }) {
+  console.log("Parent is rendered");
+  useEffect(() => {
+    console.log("Parent committed effect");
+  }, []);
+
+  return <div>{children}</div>;
+}
+
+function Child() {
+  console.log("Child is rendered");
+  useEffect(() => {
+    console.log("Child committed effect");
+  }, []);
+
+  return <p>Child</p>;
+}
+
+function ParentSibling() {
+  console.log("ParentSibling is rendered");
+  useEffect(() => {
+    console.log("ParentSibling committed effect");
+  }, []);
+
+  return <p>Parent's Sibling</p>;
+}
+
+export  function App1() {
+  return (
+    <>
+      <Parent>
+        <Child />
+      </Parent>
+      <ParentSibling />
+    </>
+  );
+}
+
+
+
